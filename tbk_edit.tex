@@ -1,15 +1,14 @@
-\documentclass[a4paper,czech]{article}
+\documentclass[a4paper]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 
-\usepackage{anysize}
+%\usepackage{anysize}
 \usepackage{geometry}
-%\geometry{a4paper, portrait, margin=2.5cm}
+\geometry{a4paper, portrait, margin=2.5cm}
 
 \usepackage{graphicx} % Required for the inclusion of images
 \usepackage{amsmath} % Required for some math elements 
-\usepackage{fancyhdr} %na headers
 \usepackage{multirow}
 \usepackage{caption}
 \usepackage[colorlinks=false,unicode=true]{hyperref}
@@ -21,6 +20,7 @@
 %\setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 \renewcommand\familydefault{\sfdefault}
+\renewcommand\textbullet{\ensuremath{\bullet}}
 %\renewcommand{\sectionmark}[1]{\uppercase{\markboth{}{\emph{~#1}}}}
 %\renewcommand{\subsectionmark}[1]{}% Remove \subsection from header
 \def\tableautorefname{tab.}
@@ -40,18 +40,35 @@
 \subsection{\textbf{Nakreslete blokové schéma RX s 2-násobným směšováním a popište funkci.}}
 \includegraphics{images/rx_2_nasobny.png}
 \begin{itemize}
-	\item Používá se vysoká frekvence 1. IF filtru $\omega_IF1$
+	\item Používá se vysoká frekvence 1. IF filtru $\omega_{IF1}$
 	\item Zrcadlové pásmo je potom vzdálené a dá se dobře filtrovat, lze použít jednoduchý filtr na fixní frekvenci
-	\item Další zpracování na vysoké frekvenci $\omega_IF1$ je neefektivní (horší parametry demodulátoru, vyšší nároky a ADC, ...) a proto se používá 2. přídavný směšovací stupeň.
+	\item Další zpracování na vysoké frekvenci $\omega_{IF1}$ je neefektivní (horší parametry demodulátoru, vyšší nároky a ADC, ...) a proto se používá 2. přídavný směšovací stupeň.
 \end{itemize}
 \subsection{\textbf{Nakreslete blokové schéma přijímače s přímou konverzí do základního pásma. Jaké jsou výhody a nevýhody této struktury.}}
 \includegraphics{images/tx_priama_konv.png}
 \begin{itemize}
 	\item\textit{Výhody}
-		\subitem Širokopásmový príjem -> malá HW omezení
-		\subitem Relativně jednoduché, malé rozměry, nízký DC příkon, cena, ...
-		\subitem ADC pracují na nízkých frekv. -> výhodné parametry, cena
-		\subitem Demodulace je prováděna v digitální doméně -> odpovídá koncepci (SDR – software defined radio), lze jednoduše modifikovat
-		\subitem Lze měnit $$B_M=B_IF$$
+	\begin{itemize}
+		\item Širokopásmový príjem -> malá HW omezení
+		\item Relativně jednoduché, malé rozměry, nízký DC příkon, cena,...
+		\item ADC pracují na nízkých frekv. -> výhodné parametry, cena
+		\item Demodulace je prováděna v digitální doméně -> odpovídá koncepci (SDR – software defined radio), lze jednoduše modifikovat
+		\item Lze měnit $B_M=B_{IF}$
+	\end{itemize}
+	\item\textit{Nevýhody}
+	\begin{itemize}
+		\item LO muže pronikat do antény, nelze filtrovat
+		\item IQ chyby mohou ovlivňovat potlačení zrcadlového příjmu a BER
+	\end{itemize}
+\end{itemize}
+\subsection{\textbf{Co to je transceiver? Jaký je rozdíl mezi duplexerem a diplexerem? Jak je možné konstruovat diplexery?}}
+\begin{itemize}
+	\item \textbf{Duplexer} - zařízení používané v systémech používajících full nebo half duplex kdy je nutno sloučit TX a RX do jedné antény -> slučovač
+	\item \textbf{Diplexer} - zařízení zestávajíci z dvou filtrů, umožnující dvoum signálům o dostatečně vzdálených frekvencích sdílet jeden komunikační kanál (anténu), je možné jej konstruovat kombinací dolní propusti a horní propusti nebo 2 pásmových propustí s rozdílnými propustnými pásmy na $\omega_{TX}$ a $\omega_{RX}$
+\end{itemize}
+\subsection{\textbf{Vysvětlete techniky TDD a FDD.}}
+\begin{itemize}
+	\item \textbf{TDD} - technologie duplexerů, která používá vysokofrekvenční přepínače (FET, PIN), je to jednoduché a efektivní řešení, ale s nízkou přenosovou rychlostí.
+	\item \textbf{FDD} - technologie duplexerů, která používá diplexery-slučovací filtry, RX a TX mohou pracovat 100\% času tedy dosahujeme plný duplex při splnění požadavků diplexeru.
 \end{itemize}
 \end{document}
