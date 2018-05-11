@@ -1,17 +1,19 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper,czech]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 
-%\usepackage{anysize}
+\usepackage{anysize}
 \usepackage{geometry}
-\geometry{a4paper, portrait, margin=2.5cm}
+%\geometry{a4paper, portrait, margin=2.5cm}
 
 \usepackage{graphicx} % Required for the inclusion of images
 \usepackage{amsmath} % Required for some math elements 
+\usepackage{fancyhdr} %na headers
 \usepackage{multirow}
 \usepackage{caption}
 \usepackage[colorlinks=false,unicode=true]{hyperref}
+\usepackage{indentfirst}
 \usepackage{tikz}
 \graphicspath{ {images/} }
 
@@ -19,7 +21,6 @@
 %\setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 \renewcommand\familydefault{\sfdefault}
-\renewcommand\textbullet{\ensuremath{\bullet}}
 %\renewcommand{\sectionmark}[1]{\uppercase{\markboth{}{\emph{~#1}}}}
 %\renewcommand{\subsectionmark}[1]{}% Remove \subsection from header
 \def\tableautorefname{tab.}
@@ -39,94 +40,18 @@
 \subsection{\textbf{Nakreslete blokové schéma RX s 2-násobným směšováním a popište funkci.}}
 \includegraphics{images/rx_2_nasobny.png}
 \begin{itemize}
-	\item Používá se vysoká frekvence 1. IF filtru $\omega_{IF1}$
+	\item Používá se vysoká frekvence 1. IF filtru $\omega_IF1$
 	\item Zrcadlové pásmo je potom vzdálené a dá se dobře filtrovat, lze použít jednoduchý filtr na fixní frekvenci
-	\item Další zpracování na vysoké frekvenci $\omega_{IF1}$ je neefektivní (horší parametry demodulátoru, vyšší nároky a ADC, ...) a proto se používá 2. přídavný směšovací stupeň.
+	\item Další zpracování na vysoké frekvenci $\omega_IF1$ je neefektivní (horší parametry demodulátoru, vyšší nároky a ADC, ...) a proto se používá 2. přídavný směšovací stupeň.
 \end{itemize}
 \subsection{\textbf{Nakreslete blokové schéma přijímače s přímou konverzí do základního pásma. Jaké jsou výhody a nevýhody této struktury.}}
 \includegraphics{images/tx_priama_konv.png}
 \begin{itemize}
 	\item\textit{Výhody}
-	\begin{itemize}
-		\item Širokopásmový príjem -> malá HW omezení
-		\item Relativně jednoduché, malé rozměry, nízký DC příkon, cena,...
-		\item ADC pracují na nízkých frekv. -> výhodné parametry, cena
-		\item Demodulace je prováděna v digitální doméně -> odpovídá koncepci (SDR – software defined radio), lze jednoduše modifikovat
-		\item Lze měnit $B_M=B_{IF}$
-	\end{itemize}
-	\item\textit{Nevýhody}
-	\begin{itemize}
-		\item LO muže pronikat do antény, nelze filtrovat
-		\item IQ chyby mohou ovlivňovat potlačení zrcadlového příjmu a BER
-	\end{itemize}
+		\subitem Širokopásmový príjem -> malá HW omezení
+		\subitem Relativně jednoduché, malé rozměry, nízký DC příkon, cena, ...
+		\subitem ADC pracují na nízkých frekv. -> výhodné parametry, cena
+		\subitem Demodulace je prováděna v digitální doméně -> odpovídá koncepci (SDR – software defined radio), lze jednoduše modifikovat
+		\subitem Lze měnit $$B_M=B_IF$$
 \end{itemize}
-\subsection{\textbf{Co to je transceiver? Jaký je rozdíl mezi duplexerem a diplexerem? Jak je možné konstruovat diplexery?}}
-\begin{itemize}
-	\item \textbf{Duplexer} - zařízení používané v systémech používajících full nebo half duplex kdy je nutno sloučit TX a RX do jedné antény -> slučovač
-	\item \textbf{Diplexer} - zařízení zestávajíci z dvou filtrů, umožnující dvoum signálům o dostatečně vzdálených frekvencích sdílet jeden komunikační kanál (anténu), je možné jej konstruovat kombinací dolní propusti a horní propusti nebo 2 pásmových propustí s rozdílnými propustnými pásmy na $\omega_{TX}$ a $\omega_{RX}$
-\end{itemize}
-\subsection{\textbf{Vysvětlete techniky TDD a FDD.}}
-\begin{itemize}
-	\item \textbf{TDD} - technologie duplexerů, která používá vysokofrekvenční přepínače (FET, PIN), je to jednoduché a efektivní řešení, ale s nízkou přenosovou rychlostí.
-	\item \textbf{FDD} - technologie duplexerů, která používá diplexery-slučovací filtry, RX a TX mohou pracovat 100\% času tedy dosahujeme plný duplex při splnění požadavků diplexeru.
-\end{itemize}
-
-\section{Měření}
-\subsection{\textbf{Popište sestavu skalárního analyzátoru.}}
-\begin{itemize}
-	\item vyhodnocovací jednotka -> DC zesilovač, ADC, display, DSP, klávesnice,...
-	\item generátor
-	\item 1-2 detektor
-	\item směrový můstek nebo směřová vazba
-	\item propojovací kabely, adaptéry, attenuátory.
-\end{itemize}
-\subsection{\textbf{Jak se provádí kalibrace a měření přenosu a odrazů pomocí skalárního analyzátoru? }}
-\begin{itemize}
-	\item kalibrace se provádí tak, že detektor měří na všech frekvencích $P_{in}$ a hodnoty ukládá do paměti, je potřeba kalibr $L=0$ kdy platí $P_{out}=p_{in}$ v praxi se používá krátký úsek TL nebo propojka.
-	\item při měření zisku detektor měří $P_{out}$
-	\item $G=\frac{P_{out}}{P_{in}}$ - zisk
-	\item \textbf{RL} - return loss -> o kolik dB je výkon vlny odražené nižší, než je výkon vlny dopadající $RL = -10\log(\frac{P_b}{P_a}=-(P_{bdBm}-P_{adBm})$
-	\item pro měření odražené vlny b lze použít:
-	\subitem směrovou vazbu
-	\subitem směrový můstek
-\end{itemize}
-\subsection{\textbf{Jak fungují senzory používané pro měření přenosu a odrazů pomocí skalárního analyzátoru? }}
-\begin{itemize}
-	\item \textbf{Wheastoneov můstek} - je modifikovaný, na diagonále má $50 \Omega$
-	\subitem rozdílové napětí se měří ZBS detektorem, výstupní DC napětí je odděleno odpory s hodnotami řádově $k\Omega$
-	\subitem pokud je identická bezodrazová koncovka na bráně TEST tak je můstek vyvážený, $V_{diff}=0$
-	\subitem ak je $Z_{DUT}\neq Z_0 \to V_{dif}\neq 0$
-	\item \textbf{Směrová vazba} - 3 bran schopný oddělit dopadající a odraženou vlnu
-	\subitem vlna $a_G$ projde DCp a na bráně 1=TEST vytváří dopadající vlnu $a$
-	\subitem výkon navázané části vlny $b \to b_c$ je měřen DET
-\end{itemize}
-\subsection{\textbf{Popište základní principy funkce vektorových analyzátorů obvodů VNA}}
-\begin{itemize}
-	\item měří s-parametry - koeficienty přenosu a odrazu včetně fází, má velmi efektivní korekci vlivu všech komponent v měřící trase
-\end{itemize}
-\subsection{\textbf{Proč a jak se provádí kalibrace a korekce VNA pro měření odrazů?}}
-\begin{itemize}
-	\item
-\end{itemize}
-\subsection{\textbf{Nakreslete a popište základní blokové schéma spektrálního analyzátoru SpA}}
-\begin{itemize}
-	\item
-\end{itemize}
-\subsection{\textbf{Princip měření spektra pomocí SpA}}
-\begin{itemize}
-	\item
-\end{itemize}
-\subsection{\textbf{Co to je šumový práh SpA? Jak optimálně nastavíte SpA pro měření velmi slabých signálů?}}
-\begin{itemize}
-	\item
-\end{itemize}
-\subsection{\textbf{Jaký rozdíl je mezi RBW a VBW a jaký mají tato nastavení vliv na měření pomocí SpA?}}
-\begin{itemize}
-	\item
-\end{itemize}
-\subsection{\textbf{Vysvětlete nastavení FREQ-CENRE, SPAN, REFERENCE LEVEL, SWEEP TIME, ATT. Jaký vliv mají na měření pomocí SpA?}}
-\begin{itemize}
-	\item
-\end{itemize}
-
 \end{document}
