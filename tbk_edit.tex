@@ -103,31 +103,61 @@
 \subsection{\textbf{Popište základní principy funkce vektorových analyzátorů obvodů VNA}}
 \begin{itemize}
 	\item měří s-parametry - koeficienty přenosu a odrazu včetně fází, má velmi efektivní korekci vlivu všech komponent v měřící trase
-	\item
+	\item \textbf{měření $s_{11} \text{ a } s_{21}$}
+	\begin{itemize}
+		\item jednotka 8753C má 1 výstup (S="source"=generátor) a 3 vstupy (přijímače typu superhet)
+		\item signál z výstupu S je rozdělen do větve R a do větve PORT1
+		\item přijímač R měří dopadající vlnu $a_1$
+		\item směrová vazba DCp1 navazuje -6 dB vzorek vlny $b_1$ na vstup přijímače A
+		\item směrová vazba DCp2 navazuje -6 dB vzorek vlny $b_2$ na vstup přijímače B
+		\item DSP vyhodnocuje $s_{11} \text{ a } s_{21}$
+	\end{itemize}
+	\item \textbf{měření $s_{22} \text{ a } s_{12}$}
+	\begin{itemize}
+		\item přijímač R měří dopadající vlnu $a_2$
+		\item směrová vazba DCp1 navazuje -6 dB vzorek vlny $b_1$ na vstup přijímače A
+		\item směrová vazba DCp2 navazuje -6 dB vzorek vlny $b_2$ na vstup přijímače B
+		\item DSP vyhodnocuje $s_{22} \text{ a } s_{12}$
+	\end{itemize}
 \end{itemize}
 \subsection{\textbf{Proč a jak se provádí kalibrace a korekce VNA pro měření odrazů?}}
 \begin{itemize}
-	\item
+	\item provádí se pro odstranění vlivu komponent měřící sestavy pomocí SW
+	\item můžeme použít mnoho různých metod - TRL, SOLT,...
+	\item Příklad kalibrace VNA - měření 1-branu
+	\begin{itemize}
+		\item vyžaduje 3 komplexní kalibry (nejčastěji OPEN, SHORT, MATCH)
+		\item z měření kalibrů lze určit s-parametry chybového 2-branu a výpočtem provést úplnou koreci
+	\end{itemize}
 \end{itemize}
 \subsection{\textbf{Nakreslete a popište základní blokové schéma spektrálního analyzátoru SpA}}
+\includegraphics{images/SpA.png}
 \begin{itemize}
-	\item
+	\item vstupní attenuátor zabezpečuje dostatečne nízký výkon na vstupu (typ. -20dBm) 1. směšovače $\to$ nízké vnitřní IM produkty SpA
+	\item Směšovač konvertuje vstupní signál s frekvencí $f_s$ (přeladění je široké \textbf{SPAN}) do pevného IF filtru na frekvenci $f_{IF}, šířka IF filtru je B=\textbf{RBW} - definuje měřící okno SpA$
+	\item přeladění řídí osciloskop který generuje signál s frekvencí $f_{OSC}$použitá frekvenční konverze je pak $f_{IF} = f_s-f_{OSC}$
+	\item OSC se přelaďuje do $f_{LO}$ do $f_{hi}$, řízeno nastavením \textbf{FREQ} a \textbf{SPAN}
 \end{itemize}
 \subsection{\textbf{Princip měření spektra pomocí SpA}}
 \begin{itemize}
-	\item
+	\item SpA přejíždí frekvenční pásmo \textbf{SPAN} měřícím oknem širokým \textbf{RBW}. V každém frekvenčním bodu zobrazení(celkem typ. N=400 bodů) přístroj měří výkon v okně širokém RBW a zobrazí hodnotu na displeji.
+	\item Měřené frekvenční pásmo je určeno nastavením \textbf{FREQ-CENTER}(frekve odpovídající středu zobrazení) a SPAN 
 \end{itemize}
 \subsection{\textbf{Co to je šumový práh SpA? Jak optimálně nastavíte SpA pro měření velmi slabých signálů?}}
 \begin{itemize}
-	\item
+	\item je to citlivost
+	\item pro měření velmi slabých signálů nastavíme \textbf{ATT} na 0
 \end{itemize}
 \subsection{\textbf{Jaký rozdíl je mezi RBW a VBW a jaký mají tato nastavení vliv na měření pomocí SpA?}}
 \begin{itemize}
-	\item
+	\item \textbf{RBW} - šířka frekvenčního okna, filtr s nějakou šířkou pásma
+	\item \textbf{VBW} - šířka DP filtru za detektorem, snižuje šp-šp amplitudu a nemění šumový práh
 \end{itemize}
-\subsection{\textbf{Vysvětlete nastavení FREQ-CENRE, SPAN, REFERENCE LEVEL, SWEEP TIME, ATT. Jaký vliv mají na měření pomocí SpA?}}
+\subsection{\textbf{Vysvětlete nastavení FREQ-CENTER, SPAN, REFERENCE LEVEL, SWEEP TIME, ATT. Jaký vliv mají na měření pomocí SpA?}}
 \begin{itemize}
-	\item
+	\item \textbf{REFERENCE LEVEL} - vstupní VF výkon odpovídající horní vodorovné ose
+	\item \textbf{SWEEP TIME} - doba 1 zobrazení, závisí na RBW a SPAN
+	\item ostatné viz. predchádzajúci text
 \end{itemize}
 
 \end{document}
