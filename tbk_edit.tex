@@ -160,4 +160,31 @@
 	\item ostatné viz. predchádzajúci text
 \end{itemize}
 
+\section{Antény}
+\subsection{\textbf{Co vyjadřuje teorém reciprocity antény?}}
+\begin{itemize}
+	\item 
+\end{itemize}
+\subsection{\textbf{Jak je definována vstupní impedance antény?}}
+\begin{itemize}
+	\item je to impedance, kterou by jsme naměřili na vstupních svorkách antény
+	\item sestává z odporu záření $R_{vyz}$, ze ztrátového odporu $R_{ztr}$ a z reaktance záření $X_A$
+	\item $Z_A = (R_{vyz} + R_{ztr}) + iX_A$
+\end{itemize}
+\subsection{\textbf{Co je to vyzařovací odpor antény?}}
+\begin{itemize}
+	\item je hodnotou reálného odporu v kmitně proudu antény. Je tedy jednou ze složek (té reálné) vstupní impedance v kmitně proudu.
+\end{itemize}
+\subsection{\textbf{Jak lze pomocí náhradního obvodového schématu antény vyjádřit vyzářený výkon?}}
+\begin{center}
+\includegraphics{images/ant_nahr.png}
+\end{center}
+\begin{itemize}
+	\item $P_{vyz} = \frac{1}{2}|I_g|^2R_{vyz}=\frac{|U_g|^2}{2}[\frac{R_{vyz}}{(R_{vyz}+R_{ztr}+R_g)^2+(X_A+X_g)^2}]$
+\end{itemize}
+\subsection{\textbf{Jak lze pomocí náhradního obvodového schématu antény vyjádřit výkon ztracený na anténě přeměnou na teplo?}}
+\begin{itemize}
+	\item $P_{ztr} = \frac{|U_g|^2}{8}[\frac{R_{ztr}}{(R_{vyz}+R_{ztr})^2}]$
+\end{itemize}
 \end{document}
+
