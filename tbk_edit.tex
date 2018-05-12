@@ -131,17 +131,17 @@
 	\end{itemize}
 \end{itemize}
 \subsection{\textbf{Nakreslete a popište základní blokové schéma spektrálního analyzátoru SpA}}
-\includegraphics{images/SpA.png}
+\includegraphics[width=\textwidth,keepaspectratio]{images/SpA.png}
 \begin{itemize}
 	\item vstupní attenuátor zabezpečuje dostatečne nízký výkon na vstupu (typ. -20dBm) 1. směšovače $\to$ nízké vnitřní IM produkty SpA
-	\item Směšovač konvertuje vstupní signál s frekvencí $f_s$ (přeladění je široké \textbf{SPAN}) do pevného IF filtru na frekvenci $f_{IF}, šířka IF filtru je B=\textbf{RBW} - definuje měřící okno SpA$
+	\item Směšovač konvertuje vstupní signál s frekvencí $f_s$ (přeladění je široké \textbf{SPAN}) do pevného IF filtru na frekvenci $f_{IF}$, šířka IF filtru je B=\textbf{RBW} - definuje měřící okno SpA
 	\item přeladění řídí osciloskop který generuje signál s frekvencí $f_{OSC}$použitá frekvenční konverze je pak $f_{IF} = f_s-f_{OSC}$
 	\item OSC se přelaďuje do $f_{LO}$ do $f_{hi}$, řízeno nastavením \textbf{FREQ} a \textbf{SPAN}
 \end{itemize}
 \subsection{\textbf{Princip měření spektra pomocí SpA}}
 \begin{itemize}
 	\item SpA přejíždí frekvenční pásmo \textbf{SPAN} měřícím oknem širokým \textbf{RBW}. V každém frekvenčním bodu zobrazení(celkem typ. N=400 bodů) přístroj měří výkon v okně širokém RBW a zobrazí hodnotu na displeji.
-	\item Měřené frekvenční pásmo je určeno nastavením \textbf{FREQ-CENTER}(frekve odpovídající středu zobrazení) a SPAN 
+	\item Měřené frekvenční pásmo je určeno nastavením \textbf{FREQ-CENTER}(frekv. odpovídající středu zobrazení) a SPAN 
 \end{itemize}
 \subsection{\textbf{Co to je šumový práh SpA? Jak optimálně nastavíte SpA pro měření velmi slabých signálů?}}
 \begin{itemize}
