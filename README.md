@@ -12,7 +12,7 @@
 | Radek | 4/13-19,5/1-3 | <ul><li>- [ ] </li></ul> |
 | Vojta | 5/4-7,6/1-6 | <ul><li>- [ ] </li></ul> |
 | Lopi | 6/6-15 | <ul><li>- [ ] </li></ul> |
-| Janny | 6/16-20,7/vše,ant/1-5 | <ul><li>- [X] </li></ul> | neviem najist ant/1
+| Janny | 6/16-20,7/vše,ant/1-5 | <ul><li>- [ ] </li></ul> | neviem najist ant/1
 | Kačka | ant/6-25 | <ul><li>- [ ] </li></ul> |
 | Ondra | ant/26-45 | <ul><li>- [ ] </li></ul> |
 
